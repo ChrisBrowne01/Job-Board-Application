@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import JobItem from './JobItem';
 
 const JobList = () => {
   const [jobs, setJobValues] = useState([
@@ -30,7 +31,6 @@ const JobList = () => {
     if (newJob.id.trim() !== '' && newJob.name.trim() !== '' && newJob.status.trim() !== '' && newJob.task.trim() !== '') {
       setJobValues([...jobs, newJob]);
       setNewJob({ id: '', name: '', status: '', task: '' });
-      console.log(jobs)
     }
   };
 
@@ -49,7 +49,6 @@ const JobList = () => {
         jobs.map((job) => (job.id === editingJob.id ? {...editingJob} : job))
       );
       setEditingJob(null);
-      console.log(jobs)
     }
   };
 
@@ -89,28 +88,14 @@ const JobList = () => {
           />
           <div className="grid">
             {searchFilter.map((job) => (
-                <div className={
-                  job.status === "Running" 
-                    ? "card Running" 
-                    : job.status === "Completed" 
-                    ? "card Completed" 
-                    : "card Stopped"
-                } key={job.id}>
-                  <div className="card-body">
-                    <h5 className="card-title" title={job.name.length >= 50 ? job.name : null}>
-                      {Truncate(job.name, 55)}
-                    </h5>
-                    <p className="card-description">
-                      {Truncate(job.task, 55)}
-                    </p>
-                    <p className="card-price">{job.status}</p>
-                    <div className="card-detail">
-                      
-                    </div>
-                    <button onClick={() => handleEdit(job)}>Edit</button>
-                    <button onClick={() => handleDelete(job.id)}>Delete Job</button>
-                  </div>
-                </div>
+                <JobItem 
+                  key={job.id}
+                  job={job}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  Truncate={Truncate}
+                />
+                  
             ))}
           </div>
         </div>
