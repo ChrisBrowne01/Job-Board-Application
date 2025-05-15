@@ -3,16 +3,16 @@ import { useState } from 'react';
 
 const JobList = () => {
   const [jobs, setJobValues] = useState([
-    { id: 1, name: "Bike - White", status: "Stopped", task: "Mountain bike with 21-speed gear system and lightweight aluminum frame." },
-    { id: 2, name: "Vtech Cordless Phone CS6519-15", status: "Running", task: "Cordless phone with caller ID, speakerphone, and digital answering system." },
-    { id: 3, name: "Rucksuck - Brown", status: "Stopped", task: "Stylish brown rucksack with multiple compartments and padded straps." },
-    { id: 4, name: "Vtech SN6197", status: "Stopped", task: "Cordless phone with answering machine and caller ID." },
-    { id: 5, name: "Vtech SN6187-2", status: "Running", task: "Cordless phone with two handsets, answering machine, and caller ID." },
-    { id: 6, name: "Jet Hose (Re-Nu) Bosh", status: "Completed", task: "Jet HoseHigh-pressure jet hose for efficient cleaning, compatible with Bosh systems." },
+    { id: '1', name: "Bike - White", status: "Stopped", task: "Mountain bike with 21-speed gear system and lightweight aluminum frame." },
+    { id: '2', name: "Vtech Cordless Phone CS6519-15", status: "Running", task: "Cordless phone with caller ID, speakerphone, and digital answering system." },
+    { id: '3', name: "Rucksuck - Brown", status: "Stopped", task: "Stylish brown rucksack with multiple compartments and padded straps." },
+    { id: '4', name: "Vtech SN6197", status: "Stopped", task: "Cordless phone with answering machine and caller ID." },
+    { id: '5', name: "Vtech SN6187-2", status: "Running", task: "Cordless phone with two handsets, answering machine, and caller ID." },
+    { id: '6', name: "Jet Hose (Re-Nu) Bosh", status: "Completed", task: "Jet HoseHigh-pressure jet hose for efficient cleaning, compatible with Bosh systems." },
   ]);
 
   const [search, setSearch] = useState("");
-  const [newJob, setNewJob] = useState({ id: '', name: '', status: '' });
+  const [newJob, setNewJob] = useState({ id: '', name: '', status: '', task: '' });
   const [editingJob, setEditingJob] = useState(null);
 
   const handleInputChange = (e) => {
@@ -25,14 +25,17 @@ const JobList = () => {
     setEditingJob({ ...editingJob, [name]: value });
   };
 
+  // Handles add functionallity
   const addJobToList = () => {
-    if (newJob.id.trim() !== '' && newJob.name.trim() !== '' && newJob.status.trim() !== '') {
+    if (newJob.id.trim() !== '' && newJob.name.trim() !== '' && newJob.status.trim() !== '' && newJob.task.trim() !== '') {
       setJobValues([...jobs, newJob]);
-      setNewJob({ id: '', name: '', status: '' });
+      setNewJob({ id: '', name: '', status: '', task: '' });
+      console.log(jobs)
     }
   };
 
-   const handleDelete = (id) => {
+  // Handles delete functionality 
+  const handleDelete = (id) => {
     setJobValues(jobs.filter((job) => job.id !== id));
   };
   
@@ -41,15 +44,16 @@ const JobList = () => {
   };
 
   const saveEdit = () => {
-    if (editingJob.id.trim() !== '' && editingJob.name.trim() !== '' && editingJob.status.trim() !== '') {
+    if (editingJob.id.trim() !== '' && editingJob.name.trim() !== '' && editingJob.status.trim() !== '' && editingJob.task.trim() !== '') {
       setJobValues(
-        jobs.map((job) => (job.id === editingJob.id ? editingJob : job))
+        jobs.map((job) => (job.id === editingJob.id ? {...editingJob} : job))
       );
       setEditingJob(null);
+      console.log(jobs)
     }
   };
 
-  console.log(setJobValues);
+  console.log(jobs);
   
   // Filters the list of jobs based on a search query
   const searchFilter = jobs.filter((job) => {
@@ -88,9 +92,9 @@ const JobList = () => {
                 <div className={
                   job.status === "Running" 
                     ? "card Running" 
-                    : job.status === "Stopped" 
-                    ? "card Stopped" 
-                    : "card Completed"
+                    : job.status === "Completed" 
+                    ? "card Completed" 
+                    : "card Stopped"
                 } key={job.id}>
                   <div className="card-body">
                     <h5 className="card-title" title={job.name.length >= 50 ? job.name : null}>
@@ -143,7 +147,7 @@ const JobList = () => {
             onChange={handleEditInputChange}
             placeholder="Edit Job Task"
           />
-          <button onClick={saveEdit}>Save Changes</button>
+          <button onClick={saveEdit} disabled={!editingJob.name || !editingJob.status || !editingJob.task}>Save Changes</button>
         </div>
       ) : (
         <div>
