@@ -57,8 +57,10 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
     }
   };
 
-  // Filters the list of jobs based on a input search query
-  const searchFilter = jobs.filter((job) => {
+  // Combined filter: first filter by status, then by search query
+  const filteredByStatus = statusType === "all" ? jobs : jobs.filter(job => job.status === statusType);
+
+  const searchFilter = filteredByStatus.filter((job) => {
     return Object.keys(job).some((key) =>
       job[key]
         .toString()
@@ -83,7 +85,8 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
     );
   };
 
-
+  
+  
   return (
     <>
       <section className="job-list">
