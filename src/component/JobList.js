@@ -8,27 +8,44 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
   const [search, setSearch] = useState("");
   const [newJob, setNewJob] = useState({ id: '', name: '', status: '', task: '' });
   const [editingJob, setEditingJob] = useState(null);
+  const [error, setError] = useState("")
 
   // Handle add input data entered by user
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewJob({ ...newJob, [name]: value });
-    console.log('newJob: ', newJob)
+    if (error) setError("");
   };
 
   // Handles edit input data enter by user
   const handleEditInputChange = (e) => {
     const { name, value } = e.target;
     setEditingJob({ ...editingJob, [name]: value });
+    if (error) setError("");
   };
 
   // Handles add functionallity
-  const addJobToList = () => {
-    if (newJob.id.trim() !== '' && newJob.name.trim() !== '' && newJob.status.trim() !== '' && newJob.task.trim() !== '') {
-      setJobValues([...jobs, newJob]);
+  const addJobToList = (event) => {
+    event.preventDefault();
+    if (!newJob.id.trim() || !newJob.name.trim() || !newJob.task.trim()) {
+      setError("ID, name, and task are required");
+      return;
+    }
+    // Check for duplicate ID
+    if (jobs.some(job => job.id === newJob.id.trim())) {
+      setError("A job with this ID already exists");
+      return;
+    }
+    if (newJob.id.trim() !== '' && newJob.name.trim() !== '' && newJob.task.trim() !== '') {
+      const jobToAdd = {
+        id: newJob.id.trim(),
+        name: newJob.name.trim(),
+        status: newJob.status.trim() === "Complete" || newJob.status === "Running" || newJob.status === "Stopped" ?
+                newJob.status.trim() : "Stopped",
+        task: newJob.task.trim()
+      };
+      setJobValues([...jobs, jobToAdd]);
       setNewJob({ id: '', name: '', status: '', task: '' });
-      console.log('jobs: ', jobs)
-      console.log('newJob: ', newJob)
     }
   };
 
@@ -84,8 +101,6 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
       )
     );
   };
-
-  
   
   return (
     <>
@@ -105,6 +120,7 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
               <option value="Running">Running</option>
               <option value="Completed">Completed</option>
             </select>
+            
             <input
               className="job-list-input"
               placeholder="Job Filter"
@@ -113,8 +129,9 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
             />
             <button className="toggle" onClick={() => setShow(!show)}>{!show ? "Show" : "Hide"}</button>
           </div>
-          <div className="grid">
-            {show && searchFilter.map((job) => (
+          {searchFilter.length > 0 ? (
+            <div className="grid">
+              {show && searchFilter.map((job) => (
               <JobItem
                 key={job.id}
                 job={job}
@@ -123,9 +140,11 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
                 Truncate={Truncate}
                 triggerJob={triggerJob}
               />
-
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="no-jobs">No bots match the current filter</p>
+          )}
         </div>
 
         {editingJob ? (
@@ -161,6 +180,7 @@ const JobList = ({ jobs, setJobValues, show, setShow }) => {
               placeholder="Edit Job Task"
             />
             <button onClick={saveEdit} disabled={!editingJob.name || !editingJob.status || !editingJob.task}>Save Changes</button>
+            {error && <p className="error-message">{error}</p>}
           </div>
         ) : (
           <JobForm
