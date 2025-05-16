@@ -1,6 +1,9 @@
 import React from 'react'
+import './JobItem.js';
+import './JobItem.css';
 
 const JobItem = ({job, handleDelete, handleEdit, Truncate}) => {
+  
   return (
     <div className={`card ${
                   job.status === "Running" 

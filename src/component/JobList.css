@@ -1,0 +1,84 @@
+
+/* Style JobList section  */
+
+.job-list {
+  padding: 30px 0; 
+}
+
+/* Style product input filter */
+
+.job-list-input {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  display: block;
+  transition: all .5s ease;
+}
+
+.job-list-input:focus {
+  width: 55%;
+}
+
+@media (max-width: 991.98px) {
+  .job-list-input { width: 80%; }
+  .job-list-input:focus { width: 90%; }
+}
+
+@media (max-width: 767.98px) {
+  .job-list-input { width: 80%; }
+  .job-list-input:focus { width: 90%; }
+}
+
+/* Style the Product Layout */
+.container {
+  width: 100%;
+  padding-right: calc(var(1.5rem) * 0.5);;
+  padding-left: calc(var(1.5rem) * 0.5);;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.toggle {
+  padding: 5px 15px;
+  margin: 10px
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+
+@media (min-width: 1199.98px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 991.98px) {
+    .container {
+    max-width: 960px;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .container {
+    max-width: 720px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+  }
+}
+
+@media (min-width: 575.98px) {
+  .container {
+    max-width: 60vw;
+  }
+}
