@@ -1,4 +1,112 @@
-# Getting Started with Create React App
+# Job Board Application
+
+## Overview
+
+This web application is a job board that allows users to view, filter, add, edit, and delete job listings. It's built using React and demonstrates a modular component-based architecture.
+
+## Features
+
+* **Job Listings:** Displays a list of jobs with details such as name, status, and task.
+* **Conditional Rendering:** Job items are styled differently based on their status (e.g., "Running," "Completed," "Stopped").
+* **Filtering:** Users can filter jobs by name using a search input.
+* **Adding Jobs:** Users can add new job listings with an ID, name, status, and task. Input validation is included.
+* **Editing Jobs:** Users can edit existing job listings.
+* **Deleting Jobs:** Users can delete job listings.
+* **Status Toggle:** Users can show/hide the job list.
+* **Status Filtering**: Users can filter jobs by their status.
+
+## Technologies Used
+
+* React
+* CSS
+
+## Screenshots
+
+[Image of the Job Board Application]
+
+## Setup Instructions
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone <repository_url>
+    ```
+  
+2. **Navigate to the project directory:**
+
+    ```bash
+    cd job-board-application
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4. **Run the application:**
+
+    ```bash
+    npm start
+    ```
+
+    The application will be accessible at `http://localhost:3000`.
+
+## Project Structure
+
+job-board-application/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── App.js
+│   ├── index.js
+│   ├── index.css
+│   ├── App.css
+│   ├── images/
+│   │   └── job-board-app-pic.png
+│   ├── component/
+│   │   ├── Footer.js
+│   │   ├── Header.js
+│   │   ├── JobForm.js
+│   │   ├── JobItem.js
+│   │   ├── JobItem.css
+│   │   ├── JobList.js
+│   │   └── JobList.css
+│   └── ...
+├── package.json
+└── README.md
+
+## Component Overview
+
+* **App:** The main application component that renders the header, job list, and footer. It also manages the main job data.
+* **Header:** Displays the application title and logo.
+* **Footer:** Displays the application's footer information.
+* **JobList:** Manages the list of jobs, filtering, adding, editing, and deleting jobs. It renders `JobItem` components.
+* **JobItem:** Displays individual job details and provides interactive buttons for editing and deleting jobs.
+* **JobForm:** Provides the form for adding new jobs.
+
+## Styling
+
+* CSS Modules are used for styling.  Each component that requires styling has its own associated CSS file (e.g., `JobItem.css`, `JobList.css`).
+* The styling includes conditional rendering for job statuses, where jobs are styled differently depending on whether they are "Running", "Completed", or "Stopped".
+
+## Future Enhancements
+
+* Add more comprehensive unit tests.
+* Implement user authentication.
+* Connect to a backend API to persist job data.
+* Add pagination for large job lists.
+* Implement more advanced filtering and sorting options.
+* Improve the user interface and user experience.
+
+## Credits
+
+* Christina Browne
+
+===========================================
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
