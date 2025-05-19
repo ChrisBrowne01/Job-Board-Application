@@ -55,27 +55,27 @@ This web application is a job board that allows users to view, filter, add, edit
 ## Project Structure
 
 job-board-application/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── App.js
-│   ├── index.js
-│   ├── index.css
-│   ├── App.css
-│   ├── images/
-│   │   └── job-board-app-pic.png
-│   ├── component/
-│   │   ├── Footer.js
-│   │   ├── Header.js
-│   │   ├── JobForm.js
-│   │   ├── JobItem.js
-│   │   ├── JobItem.css
-│   │   ├── JobList.js
-│   │   └── JobList.css
-│   └── ...
-├── package.json
-└── README.md
+    ├── public/
+    │   ├── index.html
+    │   └── ...
+    ├── src/
+    │   ├── App.js
+    │   ├── index.js
+    │   ├── index.css
+    │   ├── App.css
+    │   ├── images/
+    │   │   └── job-board-app-pic.png
+    │   ├── component/
+    │   │   ├── Footer.js
+    │   │   ├── Header.js
+    │   │   ├── JobForm.js
+    │   │   ├── JobItem.js
+    │   │   ├── JobItem.css
+    │   │   ├── JobList.js
+    │   │   └── JobList.css
+    │   └── ...
+    ├── package.json
+    └── README.md
 
 ## Component Overview
 
@@ -103,8 +103,6 @@ job-board-application/
 ## Credits
 
 * Christina Browne
-
-===========================================
 
 ## Getting Started with Create React App
 
